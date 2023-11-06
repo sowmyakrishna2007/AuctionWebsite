@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h1 text-align="center" class="indent" style="color: #097969">{{category}}</h1><br>
+    <div style="display: inline-block">
+        {% for item in listings %}
+
+        <div class="indent" text-align="center" style="display: inline-block">
+                <div class="box">
+                    <img src="{{item.image_url}}" alt="" width="210" height="210"><br>
+                
+                <p class="indent2"><strong><a href="/{{item.listing_item.id}}" style="color: #097969">{{item.title|truncatechars:20}}</a></strong></p>
+                <p class="indent3"><em>{{item.description|truncatechars:100}}</em></p>
+                {% if item.open_for_bid %}
+                    <p class="indent3" style="color: green"><strong><em>Open</em></strong></p>
+                {% else %}
+                    <p class="indent3" style="color: red"><strong><em>Closed</em></strong></p>
+                {% endif %}
+                <p class="indent3 final"><strong>Starting Bid: ${{item.starting_bid}}</strong></p>
+                </div><br><br>
+                
+            
+        </div>
+        {% endfor %}</div>
+    
+{% endblock %}

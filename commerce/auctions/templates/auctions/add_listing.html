@@ -1,0 +1,20 @@
+{% extends "auctions/layout.html" %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<br>
+<h1 style="color: #097969" class="indent">Create New Listing</h1>
+    <form action="{% url 'add_listing' %}" method="POST" class="indent bottom listing"><br>
+        {% csrf_token %}
+        {{ form|crispy }}
+        <br><br>
+        
+        <input class="btn btn-prim" type="submit" value="Save" style="width: 948px">
+    </form>
+    
+        
+    
+    
+
+    
+{% endblock %}

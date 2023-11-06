@@ -1,0 +1,109 @@
+.indent {
+    padding-left: 100px;
+}
+
+.top{
+    padding-top: 10px;
+}
+
+.bottom{
+    
+    padding-bottom: 50px;
+}
+
+body {
+    background-color: #eceae6 ;
+}
+
+hr {
+    height: 10px;
+    color: black;
+}
+
+.navbar-brand {
+    padding-left: 100px;
+}
+
+.box {
+    background-color: rgb(215, 210, 210);
+    border-radius: 25px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    
+}
+
+
+.desc {
+    font-size: 10px;
+}
+
+.right {
+    padding-right: 100px;
+}
+
+.left {
+    padding-left: 100px;
+    font-size: 35px;
+}
+
+.login {
+    padding-left: 100px;
+}
+
+.btn-prim {
+    background-color: #097969;
+    border-color: #097969;
+    color: white
+}
+.btn-prim:hover, .btn-prim:focus, .btn-prim:active, .btn-prim.active, .open>.dropdown-toggle.btn-prim {
+    color: #ffffff;
+    background-color: #08b79c;
+    border-color: #097969; /*set the color you want here*/
+}
+
+.listing {
+    font-weight: bold;
+}
+
+.comment_box {
+    background-color: rgb(215, 210, 210);
+    border-radius: 25px;
+}
+
+.indent3 {
+    padding-left: 10px;
+    font-size: 10px;
+    width: 210px;
+}
+
+.indent2 {
+    padding-left: 10px;
+    font-size: 20px;
+    color: #097969;
+    width: 210px;
+}
+
+div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+  }
+  
+  div.gallery:hover {
+    border: 1px solid #777;
+  }
+  
+  div.gallery img {
+    width: 100%;
+    height: auto;
+  }
+  
+  div.desc {
+    padding: 15px;
+    text-align: center;
+  }
+
+

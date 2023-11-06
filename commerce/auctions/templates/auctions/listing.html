@@ -1,0 +1,89 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    
+    <div class='indent' style="display: inline-block; padding-top: 50px;">
+        <div style="display: inline-block; padding-left: 50px;"><img src="{{listing.image_url}}" alt="" height="400" width="400"></div>
+            <div style="display: inline-block; padding-left: 100px; vertical-align: middle"><h1 style="color: #097969; width: 500px">{{listing.title}}</h1>
+                <p style="width:400px; font-size: 13px; color: black;"><em>Listed by <strong>{{listing.user.username}}</strong></em></p>
+                {% if not watching %}
+                        <form action="{% url 'watch' id=listing.id %}" method="POST" name="watch">
+                            {% csrf_token %}
+                            <input type="submit" value="Watch" name="watch" class="btn btn-prim" style="margin-bottom: 20px; margin-top: 5px;">
+                        </form>
+                    {% else %}
+                        <form action="{% url 'watch' listing.id %}" method="POST" name="watch">
+                            {% csrf_token %}
+                            <input type="submit" value="Unwatch" name="watch" class="btn btn-prim" style="margin-bottom: 20px; margin-top: 5px;">
+                        </form>
+
+                    {% endif %}
+                    
+                {% if user == listing.user %}
+                        {% if listing.open_for_bid %}
+                            <form action="{% url 'close_bid' listing.id %}" method="POST" name="close">
+                                {% csrf_token %}
+                                <input type="submit" name="close" value="Close" class="btn btn-prim" style="margin-bottom: 20px; margin-top: 5px;">
+                            </form>
+                        {% else %}
+                            <form action="{% url 'close_bid' listing.id %}" method="POST" name="close">
+                                {% csrf_token %}
+                                <input type="submit" name="close" value="Open" class="btn btn-prim" style="margin-bottom: 20px; margin-top: 5px;">
+                            </form>
+                        {% endif %}
+                {% endif %}
+                
+                
+                <p style="width:400px; font-size: 10px; color: black;"><em>{{listing.description}}</em></p>
+                {% if bid == None %}
+                    
+                    <p style="font-size: 15px;"><strong>Current Price: ${{listing.starting_bid}}</strong></p>
+                {% else %}
+                    {% if not listing.open_for_bid %}
+                        {% if bid.user ==  user %}
+                            <p style="font-size: 15px; color: green">You have won this auction!</p>
+                        {% endif %}
+                    {% else %}
+                        {% if bid.user ==  user %}
+                            <p style="font-size: 15px; color: orange">Your bid is the current bid.</p>
+                        {% endif %}
+                    {% endif %}
+                    <p style="font-size: 15px;"><strong>Current Price: ${{bid.bid}}</strong></p>
+                {% endif %}
+
+                 {% if listing.open_for_bid %}
+                    <form action="{% url 'bid' listing.id %}" method="POST" class="form-group">
+                        {% csrf_token %}
+                        <input type="number" name="bid_value" style="width: 400px; margin-bottom: 10px;" class="form-control" step="any">
+                        <input class="btn btn-prim" type="submit" value="Place Bid" style="width: 400px;">
+                    </form>
+                {% else %}
+                    <p style="font-size: 15px;">This item is not accepting bids.</p>
+                {% endif %}
+                </div>
+            
+            
+            <form action="{% url 'comment' listing.id %}" method="POST">
+                {% csrf_token %}
+                <textarea style="margin-bottom: 10px; margin-top: 50px; margin-left: 50px; width: 950px" name="comment" placeholder="Type comment here" class="form-control" rows="6"></textarea>
+                <input class="btn btn-prim" type="submit" value="Save Comment" style="width: 950px; margin-left: 50px; margin-top: 20px; margin-bottom: 50px;">
+            </form> 
+            <h2 style="margin-left: 50px; color:#097969">Comments</h2>  
+            <div style=" padding-bottom: 150px;">
+                {% for comment in comments %}
+                    
+                <div style="margin-left: 50px; margin-top: 25px; padding-left: 10px; padding-top: 13px; padding-right: 10px; padding-bottom: 8px" class="comment_box">
+                    <p style="margin-bottom:5px;">{{comment.comment}}</p>
+                    <p >Posted by <strong>{{comment.user}}</strong></p>
+                </div>
+        {% endfor %}
+            </div>
+            
+            
+            
+            
+            
+    </div>
+    
+    
+{% endblock %}
